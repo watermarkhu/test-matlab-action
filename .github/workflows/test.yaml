@@ -1,15 +1,38 @@
 name: Run MATLAB Tests on GitHub-Hosted Runner
 on: [push]
 jobs:
-  my-job:
+  build:
     name: Run MATLAB Script
     runs-on: ubuntu-latest
     steps:
+
     - name: Check out repository
       uses: actions/checkout@v4
+
     - name: Set up MATLAB
       uses: matlab-actions/setup-matlab@v2
+
     - name: Run script
       uses: matlab-actions/run-command@v2
       with:
         command: runner
+
+  julia:
+    name: Run julia command from matlab
+    runs-on: ubuntu-latest
+    steps: 
+
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Set up MATLAB
+      uses: matlab-actions/setup-matlab@v2
+
+    - uses: julia-actions/setup-julia@v2
+      with:
+        version: '1.10'
+        
+    - name: Run script
+      uses: matlab-actions/run-command@v2
+      with:
+        command: juliaversion
